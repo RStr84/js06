@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kassenzettel</title>
+
+<!--  Aufgabe: nimm den Kassenzettel von letzter woche und ergänze ihn durch:-->
+<!--  wenn die letzte zeile ausgefüllt ist (einzelpreis und anzahl), dann soll eine neue Zeile unten ergänzt werden, die-->
+<!--  auf Knopfdruck auch dort die Berechnung ausführt-->
+
+    <script>
+
+        function resetAllFields() {
+            document.querySelector('#productForm').reset();
+        }
+
+        function resetRow(button) {
+            const row = button.parentNode;
+            const inputs = row.querySelectorAll('input[type="text"], input[type="number"]');
+            inputs.forEach(input => input.value = '');
+        }
+
+        function addNewRow() {
+            const newRow = document.createElement('div');
+            newRow.className = 'productRow';
+
+            newRow.innerHTML = `
+        <input type="text" class="artikelname" placeholder="Artikelname" style="width: 250px"/>
+        <input type="number" class="einzelpreis" placeholder="Einzelpreis" style="width: 120px"/>
+        <input type="number" class="anzahl" placeholder="Anzahl" style="width: 120px"/>
+        <input type="text" class="produkt" placeholder="Produkt" readonly style="width: 120px">
+        <button type="button" onClick='resetRow(this)'>Zurücksetzen</button>
+        <br>`;
+
+            document.querySelector('#productRowsContainer').appendChild(newRow);
+        }
+
+        const getProducts = function () {
+            // Eingaben auslesen
+            const artikelnamen = document.querySelectorAll('.artikelname');
+            const einzelpreise = document.querySelectorAll('.einzelpreis');
+            const anzahlen = document.querySelectorAll('.anzahl');
+            const produkte = document.querySelectorAll('.produkt');
+
+            const einzelpreisWerte = [];
+            const anzahlenWerte = [];
+
+            for (let i = 0; i < einzelpreise.length; i++) {
+
+                // Werte auslesen
+                einzelpreisWerte.push(Number(einzelpreise[i].value));
+                anzahlenWerte.push(Number(anzahlen[i].value));
+
+                // Werte ausgeben
+                produkte[i].value = einzelpreisWerte[i] * anzahlenWerte[i] || 0;
+            }
+
+            // Überprüfung, ob alle Zeilen ausgefüllt wurden
+            if ( einzelpreise.length > 0 && einzelpreise[einzelpreise.length -1].value && anzahlen[anzahlen.length -1].value) {
+                addNewRow();
+            }
+
+            console.log(einzelpreisWerte);
+            console.log(anzahlenWerte);
+            console.log(produkte);
+        }
+
+    </script>
+
+</head>
+<body>
+
+
+<h2>Kassenzettel</h2>
+
+<form id="productForm">
+    <div id="productRowsContainer">
+
+        <div class="productRow">
+            <input type="text" class="artikelname" placeholder="Artikelname" style="width: 250px"/>
+            <input type="number" class="einzelpreis" placeholder="Einzelpreis" style="width: 120px"/>
+            <input type="number" class="anzahl" placeholder="Anzahl" style="width: 120px"/>
+            <input type="text" class="produkt" placeholder="Produkt" readonly style="width: 120px">
+            <button type="button" onClick='resetRow(this)'>Zurücksetzen</button>
+            <br>
+        </div>
+
+        <div class="productRow">
+            <input type="text" class="artikelname" placeholder="Artikelname" style="width: 250px"/>
+            <input type="number" class="einzelpreis" placeholder="Einzelpreis" style="width: 120px"/>
+            <input type="number" class="anzahl" placeholder="Anzahl" style="width: 120px"/>
+            <input type="text" class="produkt" placeholder="Produkt" readonly style="width: 120px">
+            <button type="button" onClick='resetRow(this)'>Zurücksetzen</button>
+            <br>
+        </div>
+
+        <div class="productRow">
+            <input type="text" class="artikelname" placeholder="Artikelname" style="width: 250px"/>
+            <input type="number" class="einzelpreis" placeholder="Einzelpreis" style="width: 120px"/>
+            <input type="number" class="anzahl" placeholder="Anzahl" style="width: 120px"/>
+            <input type="text" class="produkt" placeholder="Produkt" readonly style="width: 120px">
+            <button type="button" onClick='resetRow(this)'>Zurücksetzen</button>
+            <br>
+        </div>
+    </div>
+
+    <br>
+    <button type="button" onClick='getProducts()'>Berechne Produkte</button>
+    <button type="reset" onClick='resetAllFields()'>Alles Zurücksetzen</button>
+
+
+</form>
+</body>
+</html>

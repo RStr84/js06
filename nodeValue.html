@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1 id="id01">My First Page</h1>
+<p id="id02"></p>
+<p id="id03"></p>
+
+<script>
+
+    // innerHTML kann auch angesprochen werden durch .firstChild.nodeValue
+    // funktioniert bei HTML-Objekten, die einen Text drinnen haben
+
+    // document.querySelector("#id02").innerHTML = document.querySelector("#id01").childNodes[0].nodeValue;
+    // Alternativ
+    document.querySelector("#id02").innerHTML = document.querySelector("#id01").firstChild.nodeValue;
+
+    // Aufgabe: den Inhalt vom 1. Paragraphen in den 2. Paragraphen kopieren
+
+    console.log(document.querySelector("#id02").firstChild.nodeValue)
+
+    // wenn kein Text in innerHTML steht, dann gibt es kein firstChild
+    // document.querySelector("#id03").firstChild.nodeValue = document.querySelector("#id02").firstChild.nodeValue;
+
+    document.querySelector("#id03").innerHTML = document.querySelector("#id02").firstChild.nodeValue;
+
+    // Alternativ mit appendChild
+
+</script>
+
+
+</body>
+</html>
+
+<html>
+<body>
+
+<h1 id="id04">My First Page</h1>
+<p id="id05"></p>
+
+<script>
+
+    // firstChild ist das gleiche wie childNodes[0]
+    document.getElementById("id05").innerHTML = document.getElementById("id04").childNodes[0].nodeValue;
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="container"></div>
+<div id="container2"></div>
+
+<script>
+
+    // Aufgabe: erstelle eine 2 x 2 Tabelle, in der jedes Feld einen beliebigen Buchstaben enthält, siehe Smartboard
+
+    // 4 Felder erstellt und "befüllt"
+    const td1 = document.createElement("td");
+    const text1 = document.createTextNode("a");
+    td1.appendChild(text1);
+
+    const td2 = document.createElement("td");
+    const text2 = document.createTextNode("b");
+    td2.appendChild(text2);
+
+    const td3 = document.createElement("td");
+    const text3 = document.createTextNode("c");
+    td3.appendChild(text3);
+
+    const td4 = document.createElement("td");
+    const text4 = document.createTextNode("d");
+    td4.appendChild(text4);
+
+    // 2 Table rows erstellen
+    const tr1 = document.createElement("tr");
+    const tr2 = document.createElement("tr");
+
+    // die 4 Felder auf die 2 Table rows aufgeteilt
+    tr1.appendChild(td1);
+    tr1.appendChild(td2);
+    tr2.appendChild(td3);
+    tr2.appendChild(td4);
+
+    // Tabelle erzeugen
+    const table1 = document.createElement("table");
+    table1.appendChild(tr1);
+    table1.appendChild(tr2);
+    document.querySelector("#container").appendChild(table1);
+
+    // Die gleiche Tabelle in Kurzform erstellt
+    const content = "<tr><td>a</td><td>b</td></tr><tr><td>c</td><td>d</td></tr>";
+    const table2 = document.createElement("table");
+    table2.innerHTML = content;
+    document.querySelector("#container2").appendChild(table2);
+
+
+</script>
+</body>
+</html>
